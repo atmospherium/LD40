@@ -25,7 +25,9 @@ const clickReducer = (
 	}
 	switch (action.type) {
 	case "CLICK_ACTION":
-		return Object.assign({}, state, {});
+		return Object.assign({}, state, {
+			click_count: state.click_count + (action.value || 1)
+		});
 	default:
 		return initialState;
 	}

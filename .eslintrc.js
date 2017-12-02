@@ -54,6 +54,7 @@ module.exports = {
 			...restricted.filter(r => !["ForOfStatement"].includes(r.selector))
 		],
 		"global-require": 0,
+		"no-unused-vars": 0,
 		"import/no-unresolved": [2, { commonjs: true }],
 		"compat/compat": 2,
 
