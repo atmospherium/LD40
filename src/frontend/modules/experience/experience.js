@@ -60,7 +60,7 @@ export default (props: experienceProps) => (
 		<svg
 			width="100%"
 			height="180"
-			y={60}
+			y={90}
 			id="shapes"
 			viewBox="0 0 180 180"
 			preserveAspectRatio="xMidYMid meet">

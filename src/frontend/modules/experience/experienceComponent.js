@@ -24,7 +24,7 @@ var mouseDown = false;
 var timeStep;
 @connect(state => {
 	return {
-		click_count: state.stats.clicks
+		click_count: state.game.state.clicks
 	};
 })
 export default class ExperienceComponent extends React.Component<
@@ -34,7 +34,7 @@ export default class ExperienceComponent extends React.Component<
 		if (!mouseDown) return;
 		this.props.dispatch({
 			type: "CLICKED",
-			value: Math.ceil(this.props.click_count / 100)
+			value: Math.ceil(this.props.click_count / 100) + 1
 		});
 	}
 	componentWillMount() {
@@ -47,7 +47,11 @@ export default class ExperienceComponent extends React.Component<
 	}
 
 	mouseDown = () => {
-		mouseDown = true;
+		this.props.dispatch({
+			type: "CLICKED",
+			value: 10
+		});
+		//mouseDown = true;
 	};
 	mouseUp = () => {
 		mouseDown = false;

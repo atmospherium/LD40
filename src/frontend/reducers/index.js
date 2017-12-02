@@ -1,42 +1,13 @@
 // @flow
 import config from "kit/config";
+import { combineReducers } from "redux";
 import { merge } from "src/lib/redux";
 
-interface baseAction {
-	type: string,
-	value: any,
-}
-const processAction: baseAction = {
-	type: "",
-	value: 1
-};
+import achievements from "./achievements";
+import ui from "./ui";
+import state from "./state";
 
-interface baseReducer {
-	clicks: number,
-	level: number,
-}
+let gameReducer = combineReducers({ achievements, ui, state });
+config.addReducer("game", gameReducer);
 
-const initialState: baseReducer = {
-	clicks: 0,
-	level: 1
-};
-const statsReducer = (
-	state: baseReducer = initialState,
-	action: baseAction = { type: "default", value: undefined }
-) => {
-	if (typeof state == undefined) {
-		return initialState;
-	}
-	switch (action.type) {
-	case "CLICKED":
-		return merge(state, {
-			clicks: state.clicks + (action.value || 1)
-		});
-	default:
-		return initialState;
-	}
-};
-
-config.addReducer("stats", statsReducer, initialState);
-
-export default statsReducer;
+export default gameReducer;

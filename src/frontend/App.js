@@ -18,14 +18,14 @@ var timeStep;
 var mouseDown = false;
 
 @connect(state => ({
-	uiState: state.stats.clicks
+	view: state.game.ui.view
 }))
 export default class App extends React.Component<AppProps> {
 	currentDisplay(): React$Element<*> {
-		if (this.props.uiState >= 0) {
-			return <Phase1 />;
-		} else {
+		if (this.props.view == "intro") {
 			return <Intro />;
+		} else {
+			return <Phase1 />;
 		}
 	}
 	render(): React$Element<*> {

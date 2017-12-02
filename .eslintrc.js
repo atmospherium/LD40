@@ -42,7 +42,7 @@ module.exports = {
 		"react/jsx-uses-react": 1,
 		"react/react-in-jsx-scope": 1,
 		"no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
-		"react/prefer-stateless-function": [2, { ignorePureComponents: true }],
+		"react/prefer-stateless-function": [0, { ignorePureComponents: true }],
 		"react/no-multi-comp": 0,
 		"react/jsx-closing-bracket-location": [1, "after-props"],
 		"react/prop-types": 0,

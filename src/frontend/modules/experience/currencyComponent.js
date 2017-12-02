@@ -8,7 +8,7 @@ import Lootchest from "./Lootchest";
 import { connect } from "react-redux";
 import config from "kit/config";
 import Platform_style from "./platform.scss";
-import clickReducer, { initialState } from "../../reducers/base";
+import gameReducer from "../../reducers";
 const arcPath = d3
 	.arc()
 	.outerRadius(100)
@@ -24,7 +24,6 @@ interface experienceProps {
 var mouseDown = false;
 var brightness = 1;
 var timeStep;
-config.addReducer("click", clickReducer, initialState);
 @connect(state => {
 	return {
 		click_count: state.click.click_count,
