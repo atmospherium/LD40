@@ -1,0 +1,16 @@
+{
+  "javascript.validate.enable": false,
+  "javascript.format.enable": false,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 3,
+  "editor.detectIndentation": false,
+  "eslint.enable": true,
+  "eslint.autoFixOnSave": true,
+  "flow.useNPMPackagedFlow": true,
+  "prettier.eslintIntegration": true,
+  "files.associations": {
+    "editor.autoFixOnSave": true,
+    "prettier.eslintIntegration": true,
+    "eslint.server.trace": "message"
+  }
+}

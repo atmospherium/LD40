@@ -1,0 +1,5 @@
+node_modules
+dist
+src/reference
+flow-typed
+**/kit/**/*.js
