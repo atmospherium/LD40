@@ -1,5 +1,7 @@
 // @flow
 import config from "kit/config";
+import { merge } from "src/lib/redux";
+
 interface baseAction {
 	type: string,
 	value: any,
@@ -11,10 +13,12 @@ const clickAction: baseAction = {
 
 interface baseReducer {
 	click_count: number,
+	brightness: 1,
 }
 
 const initialState: baseReducer = {
-	click_count: 0
+	click_count: 0,
+	brightness: 1
 };
 const clickReducer = (
 	state: baseReducer = initialState,
@@ -25,9 +29,10 @@ const clickReducer = (
 	}
 	switch (action.type) {
 	case "CLICK_ACTION":
-		return Object.assign({}, state, {
+		return merge(state, {
 			click_count: state.click_count + (action.value || 1)
 		});
+
 	default:
 		return initialState;
 	}

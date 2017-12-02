@@ -1,7 +1,18 @@
 body {
   background-color: black;
   color: greenyellow;
+  margin: 0;
 }
 progress {
   color: green;
+}
+.button {
+  fill: rgba(0, 255, 0, 0.1);
+}
+.button:hover {
+  fill: rgba(0, 255, 0, 0.2);
+}
+
+.bottomAnchor {
+  transform-origin: bottom center;
 }
