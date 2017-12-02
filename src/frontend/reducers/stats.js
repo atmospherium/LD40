@@ -6,21 +6,21 @@ interface baseAction {
 	type: string,
 	value: any,
 }
-const clickAction: baseAction = {
-	type: "CLICK_ACTION",
+const processAction: baseAction = {
+	type: "",
 	value: 1
 };
 
 interface baseReducer {
-	click_count: number,
-	brightness: 1,
+	clicks: number,
+	level: number,
 }
 
 const initialState: baseReducer = {
-	click_count: 0,
-	brightness: 1
+	clicks: 0,
+	level: 1
 };
-const clickReducer = (
+const statsReducer = (
 	state: baseReducer = initialState,
 	action: baseAction = { type: "default", value: undefined }
 ) => {
@@ -28,16 +28,11 @@ const clickReducer = (
 		return initialState;
 	}
 	switch (action.type) {
-	case "CLICK_ACTION":
-		return merge(state, {
-			click_count: state.click_count + (action.value || 1)
-		});
-
 	default:
 		return initialState;
 	}
 };
 
-config.addReducer("click", clickReducer, initialState);
+config.addReducer("stats", statsReducer, initialState);
 
-export default clickReducer;
+export default statsReducer;

@@ -1,0 +1,20 @@
+.orange {
+  path {
+    filter: url(#orangeglow);
+    fill: black;
+  }
+
+  text {
+    stroke: darkorange;
+  }
+}
+
+.default {
+  path {
+    filter: url(#greenglow);
+    fill: black;
+  }
+  text {
+    stroke: green;
+  }
+}

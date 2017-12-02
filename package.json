@@ -72,6 +72,7 @@
     "postcss-loader": "^2.0.6",
     "postcss-nested": "^2.1.2",
     "progress-bar-webpack-plugin": "^1.10.0",
+    "react-svg-loader": "^2.1.0",
     "react-test-renderer": "^16.1.1",
     "resolve-url-loader": "^2.1.0",
     "rimraf": "^2.6.1",

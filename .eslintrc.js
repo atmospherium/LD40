@@ -29,8 +29,7 @@ module.exports = {
 		"compat",
 		"import",
 		"flowtype",
-		"flow-header",
-		"graphql"
+		"flow-header"
 	],
 	rules: {
 		"no-console": 1,

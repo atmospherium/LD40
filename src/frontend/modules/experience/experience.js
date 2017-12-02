@@ -2,6 +2,11 @@
 import React from "react";
 import * as d3 from "d3";
 import App_style from "../../App.scss";
+import Platform from "./platform";
+import Lootchest from "./Lootchest";
+import baseReducer from "../../reducers";
+import { connect } from "react-redux";
+import Platform_style from "./platform.scss";
 const arcPath = d3
 	.arc()
 	.outerRadius(100)
@@ -13,8 +18,15 @@ interface experienceProps {
 	mouseDown: Function,
 	mouseUp: Function,
 }
+var mouseDown = false;
+var brightness = 1;
+var timeStep;
+
 export default (props: experienceProps) => (
-	<svg width="100%" height="300">
+	<svg
+		width="100%"
+		height="300"
+		className={props.className || Platform_style.default}>
 		<defs>
 			<filter id="glow" x="-5000%" y="-5000%" width="10000%" height="10000%">
 				<feFlood result="flood" floodColor="#00ff00" floodOpacity="1" />
@@ -38,52 +50,51 @@ export default (props: experienceProps) => (
 				</feMerge>
 			</filter>
 		</defs>
-		<g transform="translate(300,300) rotate(180) scale(3, 1)">
-			<path
-				fill="rgb(0,255,0)"
-				style={{ filter: "url(#glow)" }}
-				d={arcPath({
-					startAngle: 0.5 * Math.PI,
-					endAngle: (1 * (props.click_count % 100) / 100 + 0.5) * Math.PI
-				})}/>
-			<path
-				fill="rgba(0,255,0,0.02)"
-				d={arcPath({
-					startAngle: 0.45 * Math.PI, //(this.props.click_count % 100) / 50 * Math.PI,
-					endAngle: 1.55 * Math.PI
-				})}/>
-			<path
-				class={App_style.button}
-				fill="rgba(0,255,0,0.2)"
-				d={buttonPath({
-					startAngle: 0,
-					endAngle: 2 * Math.PI
-				})}
-				onMouseDown={props.mouseDown}
-				onMouseUp={props.mouseUp}/>
+		<g transform="translate(0,200)">
+			<Platform
+				click_count={props.click_count}
+				mouseUp={props.mouseUp}
+				mouseDown={props.mouseDown}
+				width="100%"/>
 		</g>
-		<g id="shapes" transform="translate(300,200)">
-			<path
-				transform="translate(0, 0)"
-				fill="rgba(0,5,0,0.95)"
-				d={buttonPath({
-					startAngle: 0,
-					endAngle: 2 * Math.PI
-				})}
-				onMouseDown={props.mouseDown}
-				onMouseUp={props.mouseUp}/>
-			<text
-				style={{ userFocus: "none", userSelect: "none" }}
-				stroke="green"
-				paintOrder="stroke"
-				strokeWidth="3"
-				fill="black"
-				textAnchor="middle"
-				fontSize="30px"
-				fontWeight="bold"
-				pointerEvents="none">
-				{Math.floor(props.click_count / 100)}
-			</text>
-		</g>
+		<svg
+			width="100%"
+			height="180"
+			y={60}
+			id="shapes"
+			viewBox="0 0 180 180"
+			preserveAspectRatio="xMidYMid meet">
+			<g transform="translate(90, 90)">
+				<path
+					opacity="0.5"
+					id="orb"
+					d={buttonPath({
+						startAngle: 0,
+						endAngle: 2 * Math.PI
+					})}
+					onMouseDown={props.mouseDown}
+					onMouseUp={props.mouseUp}>
+					<animate
+						xlinkHref="#orb"
+						attributeName="opacity"
+						from="0"
+						to="0.8"
+						dur="1s"
+						fill="freeze"/>
+				</path>
+				<text
+					style={{ userFocus: "none", userSelect: "none" }}
+					paintOrder="stroke"
+					strokeWidth="3"
+					fill="black"
+					y="5"
+					textAnchor="middle"
+					fontSize="30px"
+					fontWeight="bold"
+					pointerEvents="none">
+					{Math.floor(props.click_count / 100)}
+				</text>
+			</g>
+		</svg>
 	</svg>
 );
