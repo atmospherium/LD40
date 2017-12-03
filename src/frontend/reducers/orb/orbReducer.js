@@ -35,6 +35,8 @@ export default (
 		}
 		let progress_normalized = progress / state.max;
 		return merge(state, { progress, progress_normalized, completions });
+	case "UI_GOTO_PHASE1":
+		return initialState;
 	default:
 		return state;
 	}

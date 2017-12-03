@@ -3,7 +3,12 @@ import React from "react";
 import ExperienceComponent from "../modules/experience/experienceComponent";
 import { definitions as achievements } from "../reducers/achievements";
 
+import OrbComponent from "../modules/orb/orbComponent";
+
 import Achievements from "../modules/achievements";
+import StoryComponent from "../modules/story";
+
+import Platform_style from "../modules/experience/platform.scss";
 
 export default () => (
 	<div>
@@ -31,7 +36,9 @@ export default () => (
 		</div>
 		<div style={{ textAlign: "center", margin: "5px" }}>
 			<h1>LOOT!</h1>
-			<p />
+			<div width="400px">
+				<StoryComponent />
+			</div>
 		</div>
 		<div style={{ clear: "both" }} />
 
@@ -42,7 +49,19 @@ export default () => (
 				position: "fixed",
 				bottom: "0"
 			}}>
-			<ExperienceComponent />
+			<svg width="100%" height="300px" className={Platform_style.default}>
+				<g transform="translate(0,00)">
+					<ExperienceComponent />
+					<animateTransform
+						attributeName="transform"
+						type="translate"
+						from="0 100"
+						to="0 0"
+						end="0 0"
+						dur="1s"/>
+				</g>
+				<OrbComponent />
+			</svg>
 		</div>
 	</div>
 );

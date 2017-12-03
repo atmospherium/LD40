@@ -34,8 +34,8 @@ export default class OrbComponent extends React.Component<OrbProps> {
 	componentWillReceiveProps(props: OrbProps) {
 		if (props.completions != this.props.completions) {
 			this.props.dispatch({
-				type: "ORB_COMPLETION",
-				value: props.completions
+				type: "UI_GOTO_PHASE1",
+				value: Math.random() * 20 + 15
 			});
 		}
 	}
@@ -49,7 +49,7 @@ export default class OrbComponent extends React.Component<OrbProps> {
 					this.props.dispatch({ type: "ORB_MOUSE_UP" });
 				}}
 				progress={this.props.progress_normalized}
-				text={this.props.text}/>
+				text="AGREE"/>
 		);
 	}
 }

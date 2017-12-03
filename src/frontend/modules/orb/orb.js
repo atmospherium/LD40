@@ -6,6 +6,7 @@ interface OrbProps {
 	onMouseDown: Function,
 	onMouseUp: Function,
 	progress: number,
+	text?: string,
 }
 const arcPath = d3
 	.arc()
@@ -34,21 +35,25 @@ export default (props: OrbProps) => (
 				})}/>
 			<path
 				opacity="0.5"
-				id="orb"
 				d={buttonPath({
 					startAngle: 0,
 					endAngle: 2 * Math.PI
 				})}
 				onMouseDown={props.onMouseDown}
-				onMouseUp={props.onMouseUp}>
-				<animate
-					xlinkHref="#orb"
-					attributeName="opacity"
-					from="0"
-					to="0.8"
-					dur="1s"
-					fill="freeze"/>
-			</path>
+				onMouseUp={props.onMouseUp}/>
+			{props.text ? (
+				<text
+					style={{
+						textAnchor: "middle",
+						fontSize: "24px",
+						fill: "green",
+						pointerEvents: "none"
+					}}>
+					{props.text}
+				</text>
+			) : (
+				""
+			)}
 		</g>
 	</svg>
 );

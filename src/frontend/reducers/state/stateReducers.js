@@ -30,7 +30,7 @@ export default (
 	action: Object = { type: "default", value: undefined }
 ) => {
 	switch (action.type) {
-	case "EXPERIENCE_INCREMENT":
+	case "ORB_COMPLETION":
 		let newExp = state.experience + action.value;
 		let level = calculateLevel(newExp);
 		return merge(state, {
@@ -43,8 +43,6 @@ export default (
 		return merge(state, {
 			speed: 1 + action.value.length
 		});
-	case "LOOTBOX_OPEN":
-		return merge(state);
 	default:
 		return state;
 	}

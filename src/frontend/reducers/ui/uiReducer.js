@@ -1,9 +1,10 @@
 // @flow
+import { merge } from "../../../lib/redux";
 interface uiState {
 	view: string,
 }
 const initialState: uiState = {
-	view: "other"
+	view: "phase1"
 };
 
 export default (
@@ -11,6 +12,8 @@ export default (
 	action: Object = { type: "default" }
 ) => {
 	switch (action.type) {
+	case "UI_GOTO_PHASE1":
+		return merge(state, { view: "phase1" });
 	default:
 		return state;
 	}

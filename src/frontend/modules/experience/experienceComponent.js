@@ -46,15 +46,13 @@ export default class ExperienceComponent extends React.Component<
 	};
 	render(): React$Element<*> {
 		return (
-			<div>
-				<Experience
-					level={this.props.level}
-					completion={
-						(this.props.experience - this.props.lowerBound) /
-						(this.props.upperBound - this.props.lowerBound)
-					}
-					click_count={this.props.experience}/>
-			</div>
+			<Experience
+				level={this.props.level}
+				completion={
+					(this.props.experience - this.props.lowerBound) /
+					(this.props.upperBound - this.props.lowerBound)
+				}
+				click_count={this.props.experience}/>
 		);
 	}
 }

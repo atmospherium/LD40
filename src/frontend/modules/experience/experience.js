@@ -55,6 +55,5 @@ export default (props: experienceProps) => (
 		<g transform="translate(0,200)">
 			<Platform completion={props.completion} width="100%" />
 		</g>
-		<OrbComponent />
 	</svg>
 );
