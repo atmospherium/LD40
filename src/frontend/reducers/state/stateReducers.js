@@ -13,16 +13,16 @@ const initialState = {
 	experienceLevel: 0,
 	lootboxes: 0,
 	lowerBound: 0,
-	upperBound: 10,
+	upperBound: 100,
 	speed: 1
 };
 
 const calculateLevel = (experience: number) => {
-	return Math.floor(experience / 10);
+	return Math.floor(experience / 100);
 };
 
 const calculateBound = (level: number) => {
-	return Math.floor(level * 10);
+	return Math.floor(level * 100);
 };
 
 export default (

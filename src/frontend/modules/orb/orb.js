@@ -5,6 +5,7 @@ import * as d3 from "d3";
 interface OrbProps {
 	onMouseDown: Function,
 	onMouseUp: Function,
+	progress: number,
 }
 const arcPath = d3
 	.arc()
@@ -24,6 +25,12 @@ export default (props: OrbProps) => (
 				d={arcPath({
 					startAngle: 0,
 					endAngle: 2 * Math.PI
+				})}/>
+			<path
+				style={{ stroke: "2px black", fill: "rgba(0,255,0,0.5)" }}
+				d={arcPath({
+					startAngle: 0,
+					endAngle: props.progress * 2 * Math.PI
 				})}/>
 			<path
 				opacity="0.5"

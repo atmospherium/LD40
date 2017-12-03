@@ -7,16 +7,38 @@ import Orb from "./orb";
 
 interface OrbProps {
 	dispatch: Function,
-	speed: number,
+	active: boolean,
+	progress_normalized: number,
+	completions: number,
 }
+var ticker;
 @connect(state => ({
-	experience: state.game.state.experience,
-	level: state.game.state.experienceLevel,
-	upperBound: state.game.state.upperBound,
-	lowerBound: state.game.state.lowerBound,
-	speed: state.game.state.speed
+	active: state.game.orb.active,
+	progress_normalized: state.game.orb.progress_normalized,
+	completions: state.game.orb.completions
 }))
 export default class OrbComponent extends React.Component<OrbProps> {
+	tick = () => {
+		if (!this.props.active) return;
+		this.props.dispatch({ type: "ORB_TICK" });
+	};
+	componentWillMount() {
+		ticker = setInterval(() => {
+			this.tick();
+		}, 1000 / 30);
+	}
+	componentWillUnmount() {
+		clearInterval(ticker);
+	}
+	componentWillReceiveProps(props: OrbProps) {
+		if (props.completions != this.props.completions) {
+			console.log("dispatching");
+			this.props.dispatch({
+				type: "EXPERIENCE_INCREMENT",
+				value: Math.random() * 20 + 15
+			});
+		}
+	}
 	render(): React$Element<*> {
 		return (
 			<Orb
@@ -25,7 +47,8 @@ export default class OrbComponent extends React.Component<OrbProps> {
 				}}
 				onMouseUp={() => {
 					this.props.dispatch({ type: "ORB_MOUSE_UP" });
-				}}/>
+				}}
+				progress={this.props.progress_normalized}/>
 		);
 	}
 }

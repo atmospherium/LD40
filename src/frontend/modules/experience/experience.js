@@ -19,8 +19,6 @@ const buttonPath = d3.arc().outerRadius(75);
 interface experienceProps {
 	completion: number,
 	level: number,
-	mouseDown: Function,
-	mouseUp: Function,
 }
 var mouseDown = false;
 var brightness = 1;
@@ -55,11 +53,7 @@ export default (props: experienceProps) => (
 			</filter>
 		</defs>
 		<g transform="translate(0,200)">
-			<Platform
-				completion={props.completion}
-				mouseUp={props.mouseUp}
-				mouseDown={props.mouseDown}
-				width="100%"/>
+			<Platform completion={props.completion} width="100%" />
 		</g>
 		<OrbComponent />
 	</svg>

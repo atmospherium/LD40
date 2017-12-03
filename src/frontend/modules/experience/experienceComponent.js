@@ -22,6 +22,8 @@ interface experienceProps {
 	mouseUp: Function,
 	dispatch: Function,
 	speed: number,
+	upperBound: number,
+	lowerBound: number,
 }
 var mouseDown = false;
 var timeStep;
@@ -32,35 +34,13 @@ var timeStep;
 		level: state.game.state.experienceLevel,
 		upperBound: state.game.state.upperBound,
 		lowerBound: state.game.state.lowerBound,
-		speed: state.game.state.speed
+		speed: state.game.state.speed,
+		orbActive: state.game.orb.active
 	};
 })
 export default class ExperienceComponent extends React.Component<
 	experienceProps
 > {
-	frame() {
-		if (!mouseDown) return;
-		this.props.dispatch(StateActions.addExperience(0.1 * this.props.speed));
-	}
-	componentWillMount() {
-		timeStep = setInterval(() => {
-			this.frame();
-		}, 1000 / 30);
-	}
-	componentWillUnmount() {
-		clearInterval(timeStep);
-	}
-
-	componentWillReceiveProps(props) {
-		if (props.level > this.props.level) {
-			mouseDown = false;
-			this.props.dispatch({
-				type: "STATE_LEVELED_UP",
-				value: props.level
-			});
-		}
-	}
-
 	mouseDown = () => {
 		mouseDown = true;
 	};
@@ -68,8 +48,6 @@ export default class ExperienceComponent extends React.Component<
 		return (
 			<div>
 				<Experience
-					mouseUp={this.mouseUp}
-					mouseDown={this.mouseDown}
 					level={this.props.level}
 					completion={
 						(this.props.experience - this.props.lowerBound) /
