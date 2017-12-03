@@ -35,7 +35,8 @@ var timeStep;
 		upperBound: state.game.state.upperBound,
 		lowerBound: state.game.state.lowerBound,
 		speed: state.game.state.speed,
-		orbActive: state.game.orb.active
+		orbActive: state.game.orb.active,
+		visible: state.game.ui.experienceVisible
 	};
 })
 export default class ExperienceComponent extends React.Component<
@@ -52,6 +53,7 @@ export default class ExperienceComponent extends React.Component<
 					(this.props.experience - this.props.lowerBound) /
 					(this.props.upperBound - this.props.lowerBound)
 				}
+				visible={this.props.visible}
 				click_count={this.props.experience}/>
 		);
 	}

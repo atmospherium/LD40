@@ -1,48 +1,77 @@
 // @flow
 import React from "react";
-import OrbComponent from "../modules/orb/orbIntroComponent";
+import IntroOrbComponent from "../modules/orb/orbIntroComponent";
+import introText from "./introText";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import "../modules/story/story.scss";
 
-export default () => (
-	<div style={{ textAlign: "center" }}>
-		<div style={{ textAlign: "center", margin: "5px" }}>
-			<h1 style={{ fontSize: "70px" }}>LOOT!</h1>
-			<p />
-		</div>
-		<div
-			width="400px"
-			style={{
-				width: "400px",
-				margin: "auto",
-				textAlign: "left",
-				textIndent: "15px"
-			}}>
-			<p>Dearest player,</p>
-			<p>
-				We value your time. We want this game to be the best experience
-				possible.
-			</p>
-			<p>We have no intention of wasting your time with repetitive tasks.</p>
-			<p>
-				This game represents the efforts of hundreds of people, not to mention
-				the millions of dollars invested in this cause.
-			</p>
-			<p>
-				Before you can play, you must first accept our terms of service. It's
-				nothing nefarious, we just own the game and are licensing out your right
-				to use it.
-			</p>
-		</div>
-		<div
-			style={{
-				width: "100%",
-				textAlign: "center",
-				position: "fixed",
-				bottom: "0"
-			}}>
-			<svg width="100%" height="300px">
-				<OrbComponent text="AGREE" />
-				{/*<ExperienceComponent />*/}
-			</svg>
-		</div>
-	</div>
+var timer;
+interface IntroProps {}
+interface IntroState {
+	showCount: number,
+}
+const Fade = ({ children, ...props }) => (
+	<CSSTransition {...props} timeout={400} classNames="fade">
+		{children}
+	</CSSTransition>
 );
+export default class Intro extends React.Component<IntroProps, IntroState> {
+	constructor(props: IntroProps) {
+		super(props);
+		this.state = { showCount: 0 };
+	}
+	tick() {
+		this.setState(prevState => ({ showCount: prevState.showCount + 1 }));
+	}
+	componentWillMount() {
+		timer = setInterval(() => {
+			this.tick();
+		}, 3000);
+	}
+	componentWillUnmount() {
+		clearInterval(timer);
+	}
+	render(): React$Element<*> {
+		return (
+			<div style={{ textAlign: "center" }}>
+				<div style={{ textAlign: "center", margin: "5px" }}>
+					<h1 style={{ fontSize: "70px" }}>LOOT!</h1>
+				</div>
+				<div
+					width="400px"
+					style={{
+						width: "400px",
+						margin: "auto",
+						textAlign: "left",
+						textIndent: "15px"
+					}}>
+					<TransitionGroup id="storyList">
+						{introText.filter((d, i) => this.state.showCount > i).map(text => (
+							<Fade key={text}>
+								<p>{text}</p>
+							</Fade>
+						))}
+					</TransitionGroup>
+				</div>
+				<div
+					style={{
+						width: "100%",
+						textAlign: "center",
+						position: "fixed",
+						bottom: "0"
+					}}>
+					<svg width="100%" height="300px">
+						{this.state.showCount > introText.length ? (
+							<Fade key="AGREE">
+								<IntroOrbComponent text="AGREE" />
+							</Fade>
+						) : (
+							""
+						)}
+						{/*<ExperienceComponent />*/}
+					</svg>
+				</div>
+			</div>
+		);
+	}
+}

@@ -50,16 +50,8 @@ export default () => (
 				bottom: "0"
 			}}>
 			<svg width="100%" height="300px" className={Platform_style.default}>
-				<g transform="translate(0,00)">
-					<ExperienceComponent />
-					<animateTransform
-						attributeName="transform"
-						type="translate"
-						from="0 100"
-						to="0 0"
-						end="0 0"
-						dur="1s"/>
-				</g>
+				<ExperienceComponent />
+
 				<OrbComponent />
 			</svg>
 		</div>

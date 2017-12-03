@@ -1,0 +1,25 @@
+:global .fade-enter {
+  max-height: 0;
+  opacity: 0.01;
+}
+
+:global .fade-enter.fade-enter-active {
+  opacity: 1;
+  max-height: 300;
+  transition: opacity 400ms ease-in-out, max-height 400ms ease-in;
+}
+
+:global .fade-exit {
+  max-height: 300;
+  margin: 20 0;
+  opacity: 1;
+}
+
+:global .fade-exit.fade-exit-active {
+  opacity: 0.01;
+  max-height: 0;
+  margin: 0 0;
+  padding: 0;
+  transition: opacity 400ms ease-in-out, max-height 400ms ease-out,
+    margin 400ms ease-in-out, padding 400ms ease-in-out;
+}
