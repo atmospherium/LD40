@@ -1,27 +1,44 @@
 // @flow
 import React from "react";
-import achievements from "../../reducers/achievements/achievements";
+import { AchievementInterface } from "../../reducers/achievements/achievements";
 interface AchievementProps {
-	unlocked: number[],
 	onClick: (id: number) => void,
+	achievements: AchievementInterface[],
 }
 export default (props: AchievementProps) => (
 	<div>
 		<h1>ACHIEVEMENTS!</h1>
-		{achievements.map(a => {
-			let unlocked = props.unlocked && props.unlocked.indexOf(a.id) >= 0;
-			return (
-				<p
-					onClick={() => {
-						props.onClick(a.id);
-					}}
-					style={{
-						color: unlocked ? "lightgreen" : "lightgray",
-						textShadow: unlocked ? "0 0 5px #00FF00" : ""
-					}}>
-					{a.name} - {a.description}
-				</p>
-			);
-		})}
+		{props.achievements
+			.concat(props.achievements)
+			.concat(props.achievements)
+			.concat(props.achievements)
+			.concat(props.achievements)
+			.map(a => {
+				let unlocked = props.unlocked && props.unlocked.indexOf(a.name) >= 0;
+				let color = unlocked ? "lightgreen" : "darkgray";
+				return (
+					<div
+						style={{
+							margin: "15px",
+							padding: "5px",
+							border: "2px solid ",
+							color,
+							width: "250",
+							display: "inline-block",
+							textShadow: unlocked ? "0 0 30px #00FF00" : ""
+						}}>
+						<span
+							style={{
+								fontWeight: "bold",
+								fontSize: "14px",
+								display: "block"
+							}}>
+							{a.name.toUpperCase()}
+						</span>
+						<span style={{ display: "block" }}>{a.description}</span>
+						<span style={{ display: "block" }}>{a.perk}</span>
+					</div>
+				);
+			})}
 	</div>
 );

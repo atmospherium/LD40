@@ -42,9 +42,12 @@ var timeStep;
 export default class ExperienceComponent extends React.Component<
 	experienceProps
 > {
-	mouseDown = () => {
-		mouseDown = true;
-	};
+	componentWillReceiveProps(props) {
+		if (props.level != this.props.level) {
+			console.log("LEVEL: ", props.level);
+			this.props.dispatch({ type: "EXPERIENCE_SET_LEVEL", value: props.level });
+		}
+	}
 	render(): React$Element<*> {
 		return (
 			<Experience

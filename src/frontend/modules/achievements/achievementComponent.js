@@ -7,21 +7,31 @@ import * as achievementActions from "../../reducers/achievements/achievmentActio
 interface AchievementProps {
 	dispatch: Function,
 	unlocked: number[],
+	achievements: Object[],
 }
 @connect(state => {
 	return {
-		unlocked: state.game.achievements.unlocked
+		unlocked: state.game.achievements.unlocked,
+		achievements: state.game.achievements.achievements
 	};
 })
 export default class AchievmentComponent extends React.Component<
 	AchievementProps
 > {
+	dispatchPerks = (achievementList: Object[]) => {
+		achievementList.map(achievement => {
+			return this.props.dispatch(achievement.dispatch);
+		});
+	};
 	componentWillReceiveProps(props) {
 		if (props.unlocked.length != this.props.unlocked.length) {
-			this.props.dispatch({
-				type: "STATE_UPDATE_MODIFIERS",
-				value: props.unlocked
-			});
+			let newA = props.unlocked.filter(
+				(a, i) => i >= this.props.unlocked.length
+			);
+			let newAchievements = newA.map(
+				i => this.props.achievements.filter(a => a.name == i)[0]
+			);
+			this.dispatchPerks(newAchievements);
 		}
 	}
 	render(): React$Element<*> {
@@ -30,6 +40,7 @@ export default class AchievmentComponent extends React.Component<
 				onClick={id => {
 					this.props.dispatch(achievementActions.unlockAchievement(id));
 				}}
+				achievements={this.props.achievements}
 				unlocked={this.props.unlocked}/>
 		);
 	}

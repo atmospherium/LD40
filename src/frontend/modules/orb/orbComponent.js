@@ -15,6 +15,9 @@ interface OrbProps {
 var ticker;
 @connect(state => ({
 	active: state.game.orb.active,
+	level: state.game.ui.experienceVisible
+		? state.game.state.experienceLevel
+		: "",
 	progress_normalized: state.game.orb.progress_normalized,
 	completions: state.game.orb.completions
 }))
@@ -49,7 +52,7 @@ export default class OrbComponent extends React.Component<OrbProps> {
 					this.props.dispatch({ type: "ORB_MOUSE_UP" });
 				}}
 				progress={this.props.progress_normalized}
-				text={this.props.text}/>
+				text={this.props.level}/>
 		);
 	}
 }

@@ -10,7 +10,7 @@ interface stateInterface {
 }
 const initialState = {
 	experience: 0,
-	experienceLevel: 0,
+	experienceLevel: 1,
 	lootboxes: 0,
 	lowerBound: 0,
 	upperBound: 100,
@@ -18,11 +18,11 @@ const initialState = {
 };
 
 const calculateLevel = (experience: number) => {
-	return Math.floor(experience / 100);
+	return Math.floor(experience / 100) + 1;
 };
 
 const calculateBound = (level: number) => {
-	return Math.floor(level * 100);
+	return Math.floor((level - 1) * 100);
 };
 
 export default (
@@ -31,17 +31,13 @@ export default (
 ) => {
 	switch (action.type) {
 	case "ORB_COMPLETION":
-		let newExp = state.experience + action.value;
+		let newExp = state.experience + Math.random() * 26 + 15;
 		let level = calculateLevel(newExp);
 		return merge(state, {
 			experience: newExp,
 			experienceLevel: level,
 			lowerBound: calculateBound(level),
 			upperBound: calculateBound(level + 1)
-		});
-	case "STATE_UPDATE_MODIFIERS":
-		return merge(state, {
-			speed: 1 + action.value.length
 		});
 	default:
 		return state;

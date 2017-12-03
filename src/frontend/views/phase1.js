@@ -13,32 +13,9 @@ import Platform_style from "../modules/experience/platform.scss";
 export default () => (
 	<div>
 		<div style={{ backgroundColor: "white" }}>HEADER</div>
-		<div
-			style={{
-				float: "left",
-				margin: "auto",
-				border: "1px solid green",
-				width: "300px",
-				margin: "5px",
-				textAlign: "center"
-			}}>
-			<h2>Equipment</h2>
-		</div>
-		<div
-			style={{
-				float: "right",
-				textAlign: "center",
-				width: "300px",
-				margin: "5px",
-				border: "1px solid green"
-			}}>
-			<Achievements />
-		</div>
+
 		<div style={{ textAlign: "center", margin: "5px" }}>
-			<h1>LOOT!</h1>
-			<div width="400px">
-				<StoryComponent />
-			</div>
+			<Achievements />
 		</div>
 		<div style={{ clear: "both" }} />
 
