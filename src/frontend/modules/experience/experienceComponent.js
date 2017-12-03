@@ -8,6 +8,7 @@ import Lootchest from "./Lootchest";
 import { connect } from "react-redux";
 import config from "kit/config";
 import reducers from "../../reducers";
+import * as StateActions from "../../reducers/state/stateActions";
 const arcPath = d3
 	.arc()
 	.outerRadius(100)
@@ -15,16 +16,23 @@ const arcPath = d3
 const buttonPath = d3.arc().outerRadius(75);
 
 interface experienceProps {
-	click_count: number,
+	experience: number,
+	level: number,
 	mouseDown: Function,
 	mouseUp: Function,
 	dispatch: Function,
+	speed: number,
 }
 var mouseDown = false;
 var timeStep;
+
 @connect(state => {
 	return {
-		click_count: state.game.state.clicks
+		experience: state.game.state.experience,
+		level: state.game.state.experienceLevel,
+		upperBound: state.game.state.upperBound,
+		lowerBound: state.game.state.lowerBound,
+		speed: state.game.state.speed
 	};
 })
 export default class ExperienceComponent extends React.Component<
@@ -32,10 +40,7 @@ export default class ExperienceComponent extends React.Component<
 > {
 	frame() {
 		if (!mouseDown) return;
-		this.props.dispatch({
-			type: "CLICKED",
-			value: Math.ceil(this.props.click_count / 100) + 1
-		});
+		this.props.dispatch(StateActions.addExperience(0.1 * this.props.speed));
 	}
 	componentWillMount() {
 		timeStep = setInterval(() => {
@@ -46,15 +51,18 @@ export default class ExperienceComponent extends React.Component<
 		clearInterval(timeStep);
 	}
 
+	componentWillReceiveProps(props) {
+		if (props.level > this.props.level) {
+			mouseDown = false;
+			this.props.dispatch({
+				type: "STATE_LEVELED_UP",
+				value: props.level
+			});
+		}
+	}
+
 	mouseDown = () => {
-		this.props.dispatch({
-			type: "CLICKED",
-			value: 10
-		});
-		//mouseDown = true;
-	};
-	mouseUp = () => {
-		mouseDown = false;
+		mouseDown = true;
 	};
 	render(): React$Element<*> {
 		return (
@@ -62,7 +70,12 @@ export default class ExperienceComponent extends React.Component<
 				<Experience
 					mouseUp={this.mouseUp}
 					mouseDown={this.mouseDown}
-					click_count={this.props.click_count}/>
+					level={this.props.level}
+					completion={
+						(this.props.experience - this.props.lowerBound) /
+						(this.props.upperBound - this.props.lowerBound)
+					}
+					click_count={this.props.experience}/>
 			</div>
 		);
 	}

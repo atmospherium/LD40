@@ -16,6 +16,14 @@ interface AchievementProps {
 export default class AchievmentComponent extends React.Component<
 	AchievementProps
 > {
+	componentWillReceiveProps(props) {
+		if (props.unlocked.length != this.props.unlocked.length) {
+			this.props.dispatch({
+				type: "STATE_UPDATE_MODIFIERS",
+				value: props.unlocked
+			});
+		}
+	}
 	render(): React$Element<*> {
 		return (
 			<Achievements

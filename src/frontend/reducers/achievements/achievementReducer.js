@@ -15,6 +15,11 @@ export default (
 		return initialState;
 	}
 	switch (action.type) {
+	case "STATE_LEVELED_UP":
+		switch (action.value) {
+		default:
+			return merge(state, { unlocked: [...state.unlocked, 1] });
+		}
 	case actions.ACHIEVEMENT_UNLOCK:
 		return merge(state, { unlocked: [...state.unlocked, action.value] });
 	default:

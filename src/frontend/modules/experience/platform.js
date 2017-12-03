@@ -11,7 +11,7 @@ const arcPath = d3
 const buttonPath = d3.arc().outerRadius(75);
 
 interface experienceProps {
-	click_count: number,
+	completion: number,
 	width?: string,
 	height?: string,
 	className: any,
@@ -79,8 +79,6 @@ export default (props: experienceProps) => (
 
 		<g transform="translate(110,110) rotate(180) scale(1, 1)">
 			<path
-				opacity={props.click_count / 10000}
-				style={{ fill: "white" }}
 				d={arcPath({
 					startAngle: 0.45 * Math.PI, //(this.props.click_count % 100) / 50 * Math.PI,
 					endAngle: 1.55 * Math.PI
@@ -90,7 +88,7 @@ export default (props: experienceProps) => (
 				style={{ fill: "green" }}
 				d={arcPath({
 					startAngle: 0.5 * Math.PI,
-					endAngle: (1 * (props.click_count % 100) / 100 + 0.5) * Math.PI
+					endAngle: (props.completion + 0.5) * Math.PI
 				})}/>
 
 			<path
