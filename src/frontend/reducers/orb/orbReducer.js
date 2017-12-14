@@ -12,7 +12,7 @@ interface OrbState {
 const initialState = {
 	method: "click",
 	active: false,
-	speed: 0.14,
+	speed: 0.34,
 	progress: 0.001,
 	progress_normalized: 0,
 	max: 10,
@@ -42,7 +42,7 @@ export default (
 	switch (action.type) {
 	case "ORB_MOUSE_DOWN":
 		if (state.method == "click")
-			return merge(state, getProgress(state, state.speed * 5));
+			return merge(state, getProgress(state, state.speed * 4));
 		return merge(state, { active: true });
 	case "ORB_MOUSE_UP":
 		return state; // merge(state, { active: false });

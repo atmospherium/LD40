@@ -12,6 +12,7 @@ interface AchievementProps {
 @connect(state => {
 	return {
 		unlocked: state.game.achievements.unlocked,
+		visible: state.game.achievements.visible,
 		achievements: state.game.achievements.achievements
 	};
 })
@@ -40,7 +41,9 @@ export default class AchievmentComponent extends React.Component<
 				onClick={id => {
 					this.props.dispatch(achievementActions.unlockAchievement(id));
 				}}
-				achievements={this.props.achievements}
+				achievements={this.props.achievements.filter(
+					a => this.props.visible.indexOf(a.name) >= 0
+				)}
 				unlocked={this.props.unlocked}/>
 		);
 	}

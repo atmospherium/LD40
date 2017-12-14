@@ -12,8 +12,6 @@ import Platform_style from "../modules/experience/platform.scss";
 
 export default () => (
 	<div>
-		<div style={{ backgroundColor: "white" }}>HEADER</div>
-
 		<div style={{ textAlign: "center", margin: "5px" }}>
 			<Achievements />
 		</div>

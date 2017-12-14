@@ -5,7 +5,7 @@ interface uiState {
 	experienceVisible: boolean,
 }
 const initialState: uiState = {
-	view: "phase1",
+	view: "intro",
 	experienceVisible: false
 };
 
@@ -16,6 +16,8 @@ export default (
 	switch (action.type) {
 	case "UI_GOTO_PHASE1":
 		return merge(state, { view: "phase1" });
+	case "UI_GOTO_END":
+		return merge(state, { view: "end" });
 	case "UI_SHOW_EXPERIENCE":
 		return merge(state, { experienceVisible: true });
 	default:

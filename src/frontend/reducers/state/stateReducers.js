@@ -30,8 +30,10 @@ export default (
 	action: Object = { type: "default", value: undefined }
 ) => {
 	switch (action.type) {
+	case "EXPERIENCE_SET_SPEED":
+		return merge(state, { speed: state.speed * action.value });
 	case "ORB_COMPLETION":
-		let newExp = state.experience + Math.random() * 26 + 15;
+		let newExp = state.experience + (Math.random() * 15 + 5) * state.speed;
 		let level = calculateLevel(newExp);
 		return merge(state, {
 			experience: newExp,

@@ -44,8 +44,14 @@ export default class ExperienceComponent extends React.Component<
 > {
 	componentWillReceiveProps(props) {
 		if (props.level != this.props.level) {
-			console.log("LEVEL: ", props.level);
-			this.props.dispatch({ type: "EXPERIENCE_SET_LEVEL", value: props.level });
+			if (props.level > 500) {
+				this.props.dispatch({ type: "UI_GOTO_END" });
+			} else {
+				this.props.dispatch({
+					type: "EXPERIENCE_SET_LEVEL",
+					value: props.level
+				});
+			}
 		}
 	}
 	render(): React$Element<*> {

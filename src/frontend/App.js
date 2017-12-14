@@ -7,6 +7,7 @@ import reducers from "./reducers";
 
 import Intro from "./views/intro";
 import Phase1 from "./views/phase1";
+import End from "./views/end";
 
 interface AppProps {
 	uiState: number,
@@ -24,6 +25,8 @@ export default class App extends React.Component<AppProps> {
 	currentDisplay(): React$Element<*> {
 		if (this.props.view == "intro") {
 			return <Intro />;
+		} else if (this.props.view == "end") {
+			return <End />;
 		} else {
 			return <Phase1 />;
 		}
